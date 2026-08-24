@@ -10,6 +10,7 @@ import { env } from "./config/env.js";
 import dns from "node:dns";
 
 // route imports
+import authRouter from "./routes/auth.routes.js";
 
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
@@ -29,6 +30,7 @@ app.use(cookieParser());
 
 // routes
 app.get("/", (req, res) => res.json({ message: "API running" }));
+app.use("/api/auth", authRouter);
 
 // error handler
 app.use(errorHandler);
