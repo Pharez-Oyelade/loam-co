@@ -19,14 +19,13 @@ export const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       user: null,
-      token: null,
       isAuthenticated: false,
-      setAuth: (user) => set({ user, isAuthenticated: true }),
-      clearAuth: () => set({ user: null, token: null, isAuthenticated: false }),
+      setAuth: (user: User) => set({ user, isAuthenticated: true }),
+      clearAuth: () => set({ user: null, isAuthenticated: false }),
     }),
     {
       name: "auth-storage",
-      partialize: (state: any) => ({ user: state.user, token: state.token }),
+      partialize: (state) => ({ user: state.user }),
     },
   ),
 );
