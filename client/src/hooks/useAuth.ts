@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import {
   registerUser,
   loginUser,
+  adminLoginUser,
   logoutUser,
   fetchCurrentUser,
   type LoginPayload,
@@ -89,6 +90,21 @@ export function useAuth() {
     },
   });
 
+  const adminLoginMutation = useMutation({
+    mutationFn: (payload: LoginPayload) => adminLoginUser(payload),
+    onSuccess: (data: AuthResponse) => {
+      setAuth(data.user);
+      queryClient.setQueryData(authKeys.user(), data);
+
+      notify.success(`Welcome to Admin Portal, ${data.user.name}`);
+      router.push("/admin");
+    },
+    onError: (error: any) => {
+      console.error(error);
+      notify.error(error.message || "Admin login failed");
+    },
+  });
+
   const logoutMutation = useMutation({
     mutationFn: logoutUser,
     onSuccess: () => {
@@ -102,6 +118,8 @@ export function useAuth() {
     isRegistering: registerMutation.isPending,
     login: loginMutation.mutateAsync,
     isLoggingIn: loginMutation.isPending,
+    adminLogin: adminLoginMutation.mutateAsync,
+    isAdminLoggingIn: adminLoginMutation.isPending,
     logout: logoutMutation.mutateAsync,
     isLoggingOut: logoutMutation.isPending,
   };
