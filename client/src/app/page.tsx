@@ -7,10 +7,13 @@ import Hero from "@/components/landing/Hero";
 import Pillars from "@/components/landing/Pillars";
 import ProducerVideo from "@/components/landing/ProducerVideo";
 import HowItWorks from "@/components/landing/HowItWorks";
+import InTheBox from "@/components/landing/InTheBox";
+import Pricing from "@/components/landing/Pricing";
+import Footer from "@/components/ui/Footer";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1">
+    <main className="">
       {/* <Navbar /> */}
 
       {/* Hero Section */}
@@ -20,7 +23,9 @@ export default function Home() {
       <Pillars />
       {/* Producer video */}
       <ProducerVideo />
+      <InTheBox />
       <HowItWorks />
+      {/* <Pricing /> */}
 
       {/* Subscription Tiers Teaser */}
       <section className="py-16 sm:py-20 border-t border-border bg-surface-muted">
@@ -50,6 +55,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-    </div>
+
+      {/* <Footer /> */}
+    </main>
   );
 }
